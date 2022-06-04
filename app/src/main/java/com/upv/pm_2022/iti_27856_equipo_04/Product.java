@@ -4,12 +4,12 @@ public class Product {
 
     private String name;
     private int id;
-    private int brandId;
+    private Brand brand;
     private double price;
 
-    public Product(String name, int brandId, double price){
+    public Product(String name, Brand brand, double price){
         this.setName(name);
-        this.setBrandId(brandId);
+        this.setBrand(brand);
         this.setPrice(price);
     }
 
@@ -21,8 +21,8 @@ public class Product {
         this.name = name;
     }
 
-    public void setBrandId(int brandId) {
-        this.brandId = brandId;
+    public void setBrand(Brand brandId) {
+        this.brand = brand;
     }
 
     public void setPrice(double price) {
@@ -33,8 +33,8 @@ public class Product {
         return id;
     }
 
-    public int getBrandId() {
-        return brandId;
+    public Brand getBrand() {
+        return brand;
     }
 
     public String getName() {
@@ -50,7 +50,7 @@ public class Product {
         return "Product{" +
                 "name='" + name + '\'' +
                 ", id=" + id +
-                ", brandId=" + brandId +
+                ", brand=" + brand +
                 ", price=" + price +
                 '}';
     }

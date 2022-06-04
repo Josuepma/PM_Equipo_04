@@ -23,4 +23,12 @@ public class Brand {
     public int getId() {
         return this.id;
     }
+
+    @Override
+    public String toString() {
+        return "Brand{" +
+                "name='" + name + '\'' +
+                ", id=" + id +
+                '}';
+    }
 }
