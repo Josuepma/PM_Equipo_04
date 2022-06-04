@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <item
+        android:id="@+id/text_color"
+        android:title="Text Color"
+        app:showAsAction="always|withText"
+        android:orderInCategory="1"
+        >
+        <!-- Starting the text color sub menu which have three items-->
+        <menu>
+            <item
+                android:id="@+id/red"
+                android:title="Red"
+
+                />
+            <item
+                android:id="@+id/green"
+                android:title="Green"
+
+                />
+            <item
+                android:id="@+id/blue"
+                android:title="Blue"
+
+                />
+        </menu>
+    </item>
+    <item
+        android:id="@+id/large_text"
+        android:title="Large"
+        app:showAsAction="ifRoom|withText"
+        android:orderInCategory="2"
+
+        />
+    <item
+        android:id="@+id/medium_text"
+        android:title="Medium"
+        app:showAsAction="never|withText"
+        android:orderInCategory="3"
+
+        />
+    <item
+        android:id="@+id/small_text"
+        android:title="Small Text"
+        app:showAsAction="never|withText"
+        android:orderInCategory="4"
+
+        />
+</menu>
