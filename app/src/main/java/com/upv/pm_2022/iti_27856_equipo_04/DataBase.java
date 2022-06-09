@@ -43,4 +43,5 @@ public class DataBase extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS Product");
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS Brand");
     }
+
 }
