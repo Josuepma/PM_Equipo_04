@@ -1,7 +1,11 @@
 package com.upv.pm_2022.iti_27856_equipo_04;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -36,5 +40,33 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch(item.getItemId()){
+            case R.id.Menu_about:
+                // Show dialog say our names
+                AlertDialog.Builder ADX;
+                AlertDialog AD;
+                ADX = new AlertDialog.Builder(this);
+                AD = ADX.create();
+                AD.setMessage(
+                        "Josue Elisoe Perales Melendez Y Alcocer \n" +
+                        "Carlos Sanchez Charles \n" +
+                        "Hector Varela \n" +
+                        "Anel Baez"
+                        );
+                AD.show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
 }
