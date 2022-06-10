@@ -4,13 +4,13 @@ public class Comparative {
 
     private int id;
     private double difference;
-    private Product Product1;
-    private Product Product2;
+    private Price price1;
+    private Price price2;
 
-    public Comparative(Product product1, Product product2) {
-        Product1 = product1;
-        Product2 = product2;
-        Double difference = Math.abs(product1.getPrice() - product2.getPrice());
+    public Comparative(Price price1, Price price2) {
+        setPrice1(price1);
+        setPrice2(price2);
+        Double difference = Math.abs(price1.getPrice() - price2.getPrice());
         this.setDifference(difference);
     }
 
@@ -22,28 +22,28 @@ public class Comparative {
         this.difference = difference;
     }
 
-    public void setProduct1(Product product1) {
-        Product1 = product1;
-    }
-
-    public void setProduct2(Product product2) {
-        Product2 = product2;
-    }
-
     public int getId() {
         return id;
     }
 
-    public Product getProduct1() {
-        return Product1;
-    }
-
-    public Product getProduct2() {
-        return Product2;
-    }
-
     public double getDifference() {
         return difference;
+    }
+
+    public Price getPrice1() {
+        return price1;
+    }
+
+    public void setPrice1(Price price1) {
+        this.price1 = price1;
+    }
+
+    public Price getPrice2() {
+        return price2;
+    }
+
+    public void setPrice2(Price price2) {
+        this.price2 = price2;
     }
 
     @Override
@@ -51,8 +51,8 @@ public class Comparative {
         return "Comparative{" +
                 "id=" + id +
                 ", difference=" + difference +
-                ", Product1=" + Product1 +
-                ", Product2=" + Product2 +
+                ", price1=" + price1 +
+                ", price2=" + price2 +
                 '}';
     }
 }

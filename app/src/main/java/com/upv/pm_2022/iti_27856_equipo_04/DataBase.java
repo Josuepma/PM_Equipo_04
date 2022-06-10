@@ -11,19 +11,28 @@ public class DataBase extends SQLiteOpenHelper {
 
     private String[] create = new String[]{
             "CREATE TABLE Brand" +
-                    "(id INTEGER PRIMARY KEY, name TEXT)",
+                    "(id INTEGER PRIMARY KEY, " +
+                    "name TEXT)",
             "CREATE TABLE Product" +
-                    "(id INTEGER PRIMARY KEY, name TEXT," +
+                    "(id INTEGER PRIMARY KEY, " +
+                    "name TEXT," +
                     "id_marca REFERENCES Brand(id))",
             "CREATE TABLE Store" +
-                    "(id INTEGER PRIMARY KEY, name TEXT, address TEXT)",
+                    "(id INTEGER PRIMARY KEY, " +
+                    "name TEXT, " +
+                    "address TEXT)",
             "CREATE TABLE Price" +
-                    "(id INTEGER PRIMARY KEY, price DECIMAL(5,2), id_store REFERENCES Store(id)," +
+                    "(id INTEGER PRIMARY KEY, " +
+                    "price DECIMAL(5,2), " +
+                    "date DATETIME," +
+                    "id_store REFERENCES Store(id)," +
                     "id_product REFERENCES Product(id))",
             "CREATE TABLE Comparative" +
-                    "(id INTEGER PRIMARY KEY, difference DECIMAL(5,2),date DATETIME, " +
-                    "id_product_1 REFERENCES Product(id),id_product_2 REFERENCES Product(id))"
-
+                    "(id INTEGER PRIMARY KEY, " +
+                    "difference DECIMAL(5,2)," +
+                    "date DATETIME, " +
+                    "id_price_1 REFERENCES Price(id)," +
+                    "id_price_2 REFERENCES Price(id))"
     };
 
     String[] delete = new String[]{
