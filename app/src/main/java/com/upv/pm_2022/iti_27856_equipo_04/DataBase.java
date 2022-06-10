@@ -9,13 +9,30 @@ import androidx.annotation.Nullable;
 
 public class DataBase extends SQLiteOpenHelper {
 
-    private String sqlCreate = "CREATE TABLE Brand" +
-            "(id INTEGER PRIMARY KEY, name TEXT)";
-    private String sqlCreate2 = "CREATE TABLE Product" +
-            "(id INTEGER PRIMARY KEY, name TEXT,price DECIMAL(5,2), id_marca REFERENCES Brand(id))";
-    private String sqlCreate3 = "CREATE TABLE Comparative" +
-            "(id INTEGER PRIMARY KEY, difference DECIMAL(5,2),date DATETIME, " +
-            "id_product_1 REFERENCES Product(id),id_product_2 REFERENCES Product(id))";
+    private String[] create = new String[]{
+            "CREATE TABLE Brand" +
+                    "(id INTEGER PRIMARY KEY, name TEXT)",
+            "CREATE TABLE Product" +
+                    "(id INTEGER PRIMARY KEY, name TEXT," +
+                    "id_marca REFERENCES Brand(id))",
+            "CREATE TABLE Store" +
+                    "(id INTEGER PRIMARY KEY, name TEXT, address TEXT)",
+            "CREATE TABLE Price" +
+                    "(id INTEGER PRIMARY KEY, price DECIMAL(5,2), id_store REFERENCES Store(id)," +
+                    "id_product REFERENCES Product(id))",
+            "CREATE TABLE Comparative" +
+                    "(id INTEGER PRIMARY KEY, difference DECIMAL(5,2),date DATETIME, " +
+                    "id_product_1 REFERENCES Product(id),id_product_2 REFERENCES Product(id))"
+
+    };
+
+    String[] delete = new String[]{
+            "DROP TABLE IF EXISTS Comparative",
+            "DROP TABLE IF EXISTS Store",
+            "DROP TABLE IF EXISTS Prices",
+            "DROP TABLE IF EXISTS Product",
+            "DROP TABLE IF EXISTS Brand"
+    };
 
     public DataBase(@Nullable Context context, @Nullable String name, @Nullable CursorFactory factory, int version) {
         super(context, name, factory, version);
@@ -23,9 +40,9 @@ public class DataBase extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL(sqlCreate);
-        sqLiteDatabase.execSQL(sqlCreate2);
-        sqLiteDatabase.execSQL(sqlCreate3);
+        for (int i = 0; i < create.length; i++){
+            sqLiteDatabase.execSQL(create[i]);
+        }
     }
 
     @Override
@@ -39,9 +56,9 @@ public class DataBase extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS Comparacion");
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS Product");
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS Brand");
+        for (int j = 0; j < delete.length; j++){
+            sqLiteDatabase.execSQL(delete[j]);
+        }
     }
 
 }
