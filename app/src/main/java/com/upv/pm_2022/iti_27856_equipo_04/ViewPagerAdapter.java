@@ -8,7 +8,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 public class ViewPagerAdapter extends FragmentStateAdapter {
 
-    private final int NUM_TABS = 3;
+    private final int NUM_TABS = 4;
 
     public ViewPagerAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
         super(fragmentManager,lifecycle);
@@ -20,6 +20,8 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
         if (position == 1)
             return new ProductFragment();
         if (position == 2)
+            return new StoreFragment();
+        if (position == 3)
             return new ComparativeFragment();
         return new BrandFragment();
     }

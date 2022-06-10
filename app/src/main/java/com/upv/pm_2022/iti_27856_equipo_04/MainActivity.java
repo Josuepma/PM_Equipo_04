@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), getLifecycle());
         viewPager2.setAdapter(adapter);
 
-        String[] tabs = new String[]{"Brand","Product","Comparative"};
+        String[] tabs = new String[]{"Brands","Products","Prices","Comparatives"};
         new TabLayoutMediator(tabLayout, viewPager2,
                 (tab, position) -> tab.setText(tabs[position])
         ).attach();
