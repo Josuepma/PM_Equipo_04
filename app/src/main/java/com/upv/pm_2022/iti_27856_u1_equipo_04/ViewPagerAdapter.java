@@ -1,4 +1,4 @@
-package com.upv.pm_2022.iti_27856_equipo_04;
+package com.upv.pm_2022.iti_27856_u1_equipo_04;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;

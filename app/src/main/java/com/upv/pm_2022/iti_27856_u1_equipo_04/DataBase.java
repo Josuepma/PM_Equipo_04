@@ -1,4 +1,4 @@
-package com.upv.pm_2022.iti_27856_equipo_04;
+package com.upv.pm_2022.iti_27856_u1_equipo_04;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -45,6 +45,10 @@ public class DataBase extends SQLiteOpenHelper {
 
     public DataBase(@Nullable Context context, @Nullable String name, @Nullable CursorFactory factory, int version) {
         super(context, name, factory, version);
+    }
+
+    public DataBase(@Nullable Context context){//al chile que hueva ponerlo por separado
+        super(context,"merch.db",null,1);
     }
 
     @Override

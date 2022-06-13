@@ -13,8 +13,7 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:text="@string/Product" />
 
         <EditText
@@ -24,18 +23,25 @@
             android:hint="Name product"
             android:id="@+id/Product_name"/>
 
-        <EditText
+        <Button
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2"
-            android:hint="Price product"
-            android:id="@+id/Product_price"/>
+            android:layout_weight="1"
+            android:text="Add product"
+            android:id="@+id/btn_product_add"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:text="Añadir la relacion a la marca"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="Price product"
+            android:id="@+id/btn_product_price"/>
 
     </LinearLayout>
 
