@@ -1,5 +1,7 @@
 package com.upv.pm_2022.iti_27856_u1_equipo_04;
 
+import android.content.Context;
+
 public class Product {
 
     private String name;
@@ -33,6 +35,10 @@ public class Product {
 
     public String getName() {
         return name;
+    }
+
+    public Product getProduct(Context context, int i){
+        return null;
     }
 
     @Override

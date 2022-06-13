@@ -1,17 +1,30 @@
 package com.upv.pm_2022.iti_27856_u1_equipo_04;
 
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
+import java.util.ArrayList;
+import java.util.Date;
+
 public class Comparative {
 
     private int id;
     private double difference;
     private Price price1;
     private Price price2;
+    private Date date;
+    private static final String TABLE = "Comparative";
 
     public Comparative(Price price1, Price price2) {
         setPrice1(price1);
         setPrice2(price2);
         Double difference = Math.abs(price1.getPrice() - price2.getPrice());
         this.setDifference(difference);
+    }
+
+    public Comparative(){
+
     }
 
     public void setId(int id) {
@@ -46,6 +59,27 @@ public class Comparative {
         this.price2 = price2;
     }
 
+    public static ArrayList<Comparative> getComparative(Context context){
+        ArrayList<Comparative> comparatives = new ArrayList<>();
+        DataBase usdbh = new DataBase(context);
+        SQLiteDatabase db = usdbh.getWritableDatabase();
+        if(db != null){
+            Cursor cursor = db.rawQuery("SELECT * from " + TABLE,null);
+            if (cursor.getCount()!=0){
+                do {
+                    Comparative comparative = new Comparative();
+                    comparative.setId(cursor.getInt(cursor.getColumnIndexOrThrow("id")));
+                    //add products
+                    comparatives.add(comparative);
+                }while(cursor.moveToNext());
+            }else{
+                comparatives = null;
+            }
+            cursor.close();
+        }
+        return comparatives;
+    }
+
     @Override
     public String toString() {
         return "Comparative{" +
@@ -54,5 +88,13 @@ public class Comparative {
                 ", price1=" + price1 +
                 ", price2=" + price2 +
                 '}';
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

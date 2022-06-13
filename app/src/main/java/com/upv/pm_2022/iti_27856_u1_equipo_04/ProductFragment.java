@@ -67,9 +67,6 @@ public class ProductFragment extends Fragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Dialog dialog = new Dialog(getContext());
-                dialog.setContentView(R.layout.dialog_list_brand);
-                ListView lv = dialog.findViewById(R.id.lv_product_brand);
 
             }
         });

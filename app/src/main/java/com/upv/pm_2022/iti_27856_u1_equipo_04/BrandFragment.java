@@ -1,5 +1,6 @@
 package com.upv.pm_2022.iti_27856_u1_equipo_04;
 
+import android.app.Dialog;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,9 +11,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -84,14 +89,16 @@ public class BrandFragment extends Fragment {
                     Toast.makeText(getContext(), "dato " + et.getText().toString() + " insertado", Toast.LENGTH_SHORT).show();
                 }
                 Cursor cursor;
-                cursor = db.rawQuery("select name from Brand ", null);
-                String cadena,Fin="";
+                cursor = db.rawQuery("select * from Brand ", null);
+                String cadena, cadena1 ,Fin="";
                 if (cursor.getCount() != 0) {
                     if (cursor.moveToFirst()) {
                         do {
                             cadena = cursor.getString(cursor
+                                    .getColumnIndexOrThrow("id"));
+                            cadena1 = cursor.getString(cursor
                                     .getColumnIndexOrThrow("name"));
-                            Fin += cadena + "-" + "-" + "\n";
+                            Fin += cadena + "-" + cadena1 + "-" + "\n";
 
                         } while (cursor.moveToNext());
                     }
@@ -99,6 +106,19 @@ public class BrandFragment extends Fragment {
                 }
                 cursor.close();
                 Toast.makeText(getContext(), Fin, Toast.LENGTH_SHORT).show();
+            }
+        });
+        Button btn_list = view.findViewById(R.id.Brand_button_list);
+        btn_list.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Dialog dialog = new Dialog(getContext());
+                dialog.setContentView(R.layout.dialog_list_brand);
+                ListView lv = dialog.findViewById(R.id.lv_brand);
+                ArrayList<Brand> brands = Brand.getBrands(getContext());
+                ArrayAdapter<Brand> adapter = new ArrayAdapter<Brand>(getContext(), android.R.layout.simple_list_item_1,brands);
+                lv.setAdapter(adapter);
+                dialog.show();
             }
         });
         return view;

@@ -11,6 +11,11 @@ public class Brand {
     private int id;
     private static final String TABLE = "Brand";
 
+    public Brand(int id, String name){
+        this.setId(id);
+        this.setName(name);
+    }
+
     public Brand(String name){
         this.setName(name);
     }
@@ -33,6 +38,21 @@ public class Brand {
         return this.id;
     }
 
+    public static Brand getBrand(Context context, int id){
+        DataBase usdbh = new DataBase(context);
+        SQLiteDatabase db = usdbh.getWritableDatabase();
+        if(db != null){
+            Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE + " WHERE id = " + id,null);
+            if(cursor.getCount()!=0){
+                return new Brand(
+                    cursor.getInt(cursor.getColumnIndexOrThrow("id")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("name"))
+                );
+            }
+        }
+        return null;
+    }
+
     public static ArrayList<Brand> getBrands(Context context){
         ArrayList<Brand> brands = new ArrayList<>();
         DataBase usdbh = new DataBase(context);
@@ -40,12 +60,14 @@ public class Brand {
         if(db != null){
             Cursor cursor = db.rawQuery("SELECT * from " + TABLE,null);
             if (cursor.getCount()!=0){
-                do {
-                    Brand b = new Brand();
-                    b.setId(cursor.getInt(cursor.getColumnIndexOrThrow("id")));
-                    b.setName(cursor.getString(cursor.getColumnIndexOrThrow("name")));
-                    brands.add(b);
-                }while(cursor.moveToNext());
+                if (cursor.moveToFirst()){
+                    do {
+                        Brand b = new Brand();
+                        b.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndexOrThrow("id"))));
+                        b.setName(cursor.getString(cursor.getColumnIndexOrThrow("name")));
+                        brands.add(b);
+                    }while(cursor.moveToNext());
+                }
             }else{
                 brands = null;
             }
