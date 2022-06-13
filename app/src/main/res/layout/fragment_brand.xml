@@ -28,6 +28,12 @@
             android:id="@+id/Brand_button"
             android:text="Add"/>
 
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/Brand_button_list"
+            android:text="Show brands"/>
+
 
     </LinearLayout>
 
