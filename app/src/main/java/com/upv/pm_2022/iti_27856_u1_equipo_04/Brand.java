@@ -51,7 +51,7 @@ public class Brand {
         }
     }
 
-    public static Brand getBrand(Context context, int id){
+    public static Brand get(Context context, int id){
         DataBase usdbh = new DataBase(context);
         SQLiteDatabase db = usdbh.getWritableDatabase();
         if(db != null){
@@ -66,7 +66,7 @@ public class Brand {
         return null;
     }
 
-    public static ArrayList<Brand> getBrands(Context context){
+    public static ArrayList<Brand> getAll(Context context){
         ArrayList<Brand> brands = new ArrayList<>();
         DataBase usdbh = new DataBase(context);
         SQLiteDatabase db = usdbh.getWritableDatabase();
@@ -75,10 +75,10 @@ public class Brand {
             if (cursor.getCount()!=0){
                 if (cursor.moveToFirst()){
                     do {
-                        Brand b = new Brand();
-                        b.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndexOrThrow("id"))));
-                        b.setName(cursor.getString(cursor.getColumnIndexOrThrow("name")));
-                        brands.add(b);
+                        Brand brand = new Brand();
+                        brand.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndexOrThrow("id"))));
+                        brand.setName(cursor.getString(cursor.getColumnIndexOrThrow("name")));
+                        brands.add(brand);
                     }while(cursor.moveToNext());
                 }
             }else{

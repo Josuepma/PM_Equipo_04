@@ -1,9 +1,6 @@
 package com.upv.pm_2022.iti_27856_u1_equipo_04;
 
 import android.app.Dialog;
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -15,7 +12,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -91,7 +87,7 @@ public class BrandFragment extends Fragment {
                 Dialog dialog = new Dialog(getContext());
                 dialog.setContentView(R.layout.dialog_list_brand);
                 ListView lv = dialog.findViewById(R.id.lv_brand);
-                ArrayList<Brand> brands = Brand.getBrands(getContext());
+                ArrayList<Brand> brands = Brand.getAll(getContext());
                 ArrayAdapter<Brand> adapter = new ArrayAdapter<Brand>(getContext(), android.R.layout.simple_list_item_1,brands);
                 lv.setAdapter(adapter);
                 dialog.show();

@@ -66,7 +66,7 @@ public class Product {
         }
     }
 
-    public static Product getProduct(Context context, int id){
+    public static Product get(Context context, int id){
         DataBase usdbh = new DataBase(context);
         SQLiteDatabase db = usdbh.getWritableDatabase();
         if(db != null){
@@ -75,14 +75,14 @@ public class Product {
                 return new Product(
                         cursor.getInt(cursor.getColumnIndexOrThrow("id")),
                         cursor.getString(cursor.getColumnIndexOrThrow("name")),
-                        Brand.getBrand(context,Integer.parseInt(cursor.getString(cursor.getColumnIndexOrThrow("id_brand"))))
+                        Brand.get(context,Integer.parseInt(cursor.getString(cursor.getColumnIndexOrThrow("id_brand"))))
                 );
             }
         }
         return null;
     }
 
-    public static ArrayList<Product> getProducts(Context context){
+    public static ArrayList<Product> getAll(Context context){
         ArrayList<Product> products = new ArrayList<>();
         DataBase usdbh = new DataBase(context);
         SQLiteDatabase db = usdbh.getWritableDatabase();
