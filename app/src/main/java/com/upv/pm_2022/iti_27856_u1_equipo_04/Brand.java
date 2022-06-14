@@ -1,8 +1,10 @@
 package com.upv.pm_2022.iti_27856_u1_equipo_04;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -36,6 +38,17 @@ public class Brand {
 
     public int getId() {
         return this.id;
+    }
+
+    public static void insert(Context context,Brand brand){
+        DataBase usdbh = new DataBase(context);
+        SQLiteDatabase db = usdbh.getWritableDatabase();
+        if(db != null){
+            ContentValues values = new ContentValues();
+            values.put("name",brand.getName());
+            db.insert(TABLE,null,values);
+            Toast.makeText(context, "dato " + brand + " insertado", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public static Brand getBrand(Context context, int id){

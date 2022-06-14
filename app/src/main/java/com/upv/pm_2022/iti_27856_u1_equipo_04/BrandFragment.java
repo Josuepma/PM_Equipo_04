@@ -79,33 +79,9 @@ public class BrandFragment extends Fragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Toast.makeText(getContext(), et.getText().toString(), Toast.LENGTH_SHORT).show();
-                DataBase usdbh = new DataBase(getContext(), getString(R.string.Database), null, 1);
-                SQLiteDatabase db = usdbh.getWritableDatabase();
-                if(db != null){
-                    ContentValues values = new ContentValues();
-                    values.put("name",et.getText().toString());
-                    db.insert("Brand",null,values);
-                    Toast.makeText(getContext(), "dato " + et.getText().toString() + " insertado", Toast.LENGTH_SHORT).show();
-                }
-                Cursor cursor;
-                cursor = db.rawQuery("select * from Brand ", null);
-                String cadena, cadena1 ,Fin="";
-                if (cursor.getCount() != 0) {
-                    if (cursor.moveToFirst()) {
-                        do {
-                            cadena = cursor.getString(cursor
-                                    .getColumnIndexOrThrow("id"));
-                            cadena1 = cursor.getString(cursor
-                                    .getColumnIndexOrThrow("name"));
-                            Fin += cadena + "-" + cadena1 + "-" + "\n";
-
-                        } while (cursor.moveToNext());
-                    }
-                    //TV2.setText(Fin);
-                }
-                cursor.close();
-                Toast.makeText(getContext(), Fin, Toast.LENGTH_SHORT).show();
+                Brand.insert(getContext(),new Brand(
+                        et.getText().toString()
+                ));
             }
         });
         Button btn_list = view.findViewById(R.id.Brand_button_list);
