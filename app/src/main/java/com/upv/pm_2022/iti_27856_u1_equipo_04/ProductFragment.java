@@ -1,5 +1,6 @@
 package com.upv.pm_2022.iti_27856_u1_equipo_04;
 
+import android.app.Dialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
@@ -65,6 +68,7 @@ public class ProductFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_product, container, false);
+        EditText et = view.findViewById(R.id.Product_name);
         Spinner spinner = view.findViewById(R.id.Product_spinner);
         ArrayList<Brand> brands = Brand.getAll(getContext());
         ArrayAdapter<Brand> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item,brands);
@@ -74,7 +78,28 @@ public class ProductFragment extends Fragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Brand brand = (Brand) spinner.getSelectedItem();
+                //System.out.println(brand.getClass());
+                Product product = new Product(
+                        et.getText().toString(),
+                        brand
+                );
+                //System.out.println(product.getBrand().getClass());
+                Product.insert(getContext(), product);
+            }
+        });
+        Button btn_list = view.findViewById(R.id.Product_button_list);
+        btn_list.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Dialog dialog = new Dialog(getContext());
+                dialog.setContentView(R.layout.dialog_list_product);
+                ListView lv = dialog.findViewById(R.id.lv_product);
+                ArrayList<Product> products = Product.getAll(getContext());
+                System.out.println(products.size());
+                ArrayAdapter<Product> adapter = new ArrayAdapter<Product>(getContext(), android.R.layout.simple_list_item_1,products);
+                lv.setAdapter(adapter);
+                dialog.show();
             }
         });
         return view;

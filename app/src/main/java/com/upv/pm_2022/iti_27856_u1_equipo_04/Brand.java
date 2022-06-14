@@ -56,10 +56,11 @@ public class Brand {
         SQLiteDatabase db = usdbh.getWritableDatabase();
         if(db != null){
             Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE + " WHERE id = " + id,null);
-            if(cursor.getCount()!=0){
+            if(cursor.getCount()!=0 && cursor.moveToFirst()){
+                //System.out.println(cursor.getInt(1));
                 return new Brand(
-                    cursor.getInt(cursor.getColumnIndexOrThrow("id")),
-                    cursor.getString(cursor.getColumnIndexOrThrow("name"))
+                        Integer.parseInt(cursor.getString(cursor.getColumnIndexOrThrow("id"))),
+                        cursor.getString(cursor.getColumnIndexOrThrow("name"))
                 );
             }
         }

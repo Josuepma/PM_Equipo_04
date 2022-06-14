@@ -38,7 +38,7 @@ public class Product {
         this.name = name;
     }
 
-    public void setBrand(Brand brandId) {
+    public void setBrand(Brand brand) {
         this.brand = brand;
     }
 
@@ -58,6 +58,7 @@ public class Product {
         DataBase usdbh = new DataBase(context);
         SQLiteDatabase db = usdbh.getWritableDatabase();
         if(db != null){
+            //System.out.println(product.getBrand());
             ContentValues values = new ContentValues();
             values.put("name",product.getName());
             values.put("id_brand",product.getBrand().getId());
@@ -87,15 +88,17 @@ public class Product {
         DataBase usdbh = new DataBase(context);
         SQLiteDatabase db = usdbh.getWritableDatabase();
         if(db != null){
-            Cursor cursor = db.rawQuery("SELECT * from " + TABLE,null);
+            Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE,null);
             if (cursor.getCount()!=0){
+                System.out.println("entro aqui");
                 if (cursor.moveToFirst()){
                     do {
                         Product product = new Product();
                         product.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndexOrThrow("id"))));
                         product.setName(cursor.getString(cursor.getColumnIndexOrThrow("name")));
-                        product.setBrand(Brand.get(context,Integer.parseInt(cursor.getString(cursor.getColumnIndexOrThrow("id_brand")))));
+                        product.setBrand(Brand.get(context,cursor.getInt(cursor.getColumnIndexOrThrow("id_brand"))));
                         products.add(product);
+                        System.out.println(product);
                     }while(cursor.moveToNext());
                 }
             }else{
