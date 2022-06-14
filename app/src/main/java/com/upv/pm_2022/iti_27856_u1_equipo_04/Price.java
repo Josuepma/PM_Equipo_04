@@ -102,7 +102,7 @@ public class Price {
                         cursor.getDouble(cursor.getColumnIndexOrThrow("price")),
                         date,
                         Store.get(context,cursor.getInt(cursor.getColumnIndexOrThrow("id_store"))),
-                        Product.get(context,cursor.getInt(cursor.getColumnIndexOrThrow("id_brand")))
+                        Product.get(context,cursor.getInt(cursor.getColumnIndexOrThrow("id_product")))
                 );
             }
         }

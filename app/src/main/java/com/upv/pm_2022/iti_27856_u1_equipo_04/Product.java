@@ -94,6 +94,7 @@ public class Product {
                         Product product = new Product();
                         product.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndexOrThrow("id"))));
                         product.setName(cursor.getString(cursor.getColumnIndexOrThrow("name")));
+                        product.setBrand(Brand.get(context,Integer.parseInt(cursor.getString(cursor.getColumnIndexOrThrow("id_brand")))));
                         products.add(product);
                     }while(cursor.moveToNext());
                 }
