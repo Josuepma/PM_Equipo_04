@@ -16,7 +16,7 @@ public class DataBase extends SQLiteOpenHelper {
             "CREATE TABLE Product" +
                     "(id INTEGER PRIMARY KEY, " +
                     "name TEXT," +
-                    "id_marca REFERENCES Brand(id))",
+                    "brand_id REFERENCES Brand(id))",
             "CREATE TABLE Store" +
                     "(id INTEGER PRIMARY KEY, " +
                     "name TEXT, " +
