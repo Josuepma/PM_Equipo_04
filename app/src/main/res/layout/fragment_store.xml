@@ -5,10 +5,41 @@
     android:layout_height="match_parent"
     tools:context=".StoreFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical">
+
+        <!-- TODO: Update blank fragment layout -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Store" />
+
+        <EditText
+            android:id="@+id/Store_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Store name" />
+
+        <EditText
+            android:id="@+id/Store_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Store address" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/Store_button"
+            android:text="Add "/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/Store_button_list"
+            android:text="Show stores"/>
+    </LinearLayout>
+
 
 </FrameLayout>

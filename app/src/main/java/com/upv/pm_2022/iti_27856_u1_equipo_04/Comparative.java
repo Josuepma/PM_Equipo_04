@@ -91,7 +91,7 @@ public class Comparative {
         SQLiteDatabase db = usdbh.getWritableDatabase();
         if(db != null){
             Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE + " WHERE id = " + id,null);
-            if(cursor.getCount()!=0){
+            if(cursor.getCount()!=0 && cursor.moveToFirst()){
                 DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
                 Date date = null;
                 try {

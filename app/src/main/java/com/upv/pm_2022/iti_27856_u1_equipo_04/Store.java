@@ -68,7 +68,7 @@ public class Store {
         SQLiteDatabase db = usdbh.getWritableDatabase();
         if(db != null){
             Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE + " WHERE id = " + id,null);
-            if(cursor.getCount()!=0){
+            if(cursor.getCount()!=0 && cursor.moveToFirst()){
                 return new Store(
                         cursor.getInt(cursor.getColumnIndexOrThrow("id")),
                         cursor.getString(cursor.getColumnIndexOrThrow("name")),

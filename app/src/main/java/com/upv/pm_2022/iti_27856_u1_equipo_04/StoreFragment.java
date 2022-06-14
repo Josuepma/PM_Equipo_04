@@ -1,5 +1,6 @@
 package com.upv.pm_2022.iti_27856_u1_equipo_04;
 
+import android.app.Dialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +8,12 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,6 +66,32 @@ public class StoreFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_store, container, false);
+        View view = inflater.inflate(R.layout.fragment_store, container, false);
+        Button btn = view.findViewById(R.id.Store_button);
+        EditText et = view.findViewById(R.id.Store_name);
+        EditText et1 = view.findViewById(R.id.Store_address);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Store.insert(getContext(),new Store(
+                        et.getText().toString(),
+                        et1.getText().toString()
+                ));
+            }
+        });
+        Button btn_list = view.findViewById(R.id.Store_button_list);
+        btn_list.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Dialog dialog = new Dialog(getContext());
+                dialog.setContentView(R.layout.dialog_list_store);
+                ListView lv = dialog.findViewById(R.id.lv_store);
+                ArrayList<Store> stores = Store.getAll(getContext());
+                ArrayAdapter<Store> adapter = new ArrayAdapter<Store>(getContext(), android.R.layout.simple_list_item_1,stores);
+                lv.setAdapter(adapter);
+                dialog.show();
+            }
+        });
+        return view;
     }
 }
