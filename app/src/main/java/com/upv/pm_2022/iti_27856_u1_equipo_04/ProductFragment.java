@@ -79,12 +79,10 @@ public class ProductFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Brand brand = (Brand) spinner.getSelectedItem();
-                //System.out.println(brand.getClass());
                 Product product = new Product(
                         et.getText().toString(),
                         brand
                 );
-                //System.out.println(product.getBrand().getClass());
                 Product.insert(getContext(), product);
             }
         });
@@ -93,8 +91,8 @@ public class ProductFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Dialog dialog = new Dialog(getContext());
-                dialog.setContentView(R.layout.dialog_list_product);
-                ListView lv = dialog.findViewById(R.id.lv_product);
+                dialog.setContentView(R.layout.dialog_list);
+                ListView lv = dialog.findViewById(R.id.dialog_lv);
                 ArrayList<Product> products = Product.getAll(getContext());
                 System.out.println(products.size());
                 ArrayAdapter<Product> adapter = new ArrayAdapter<Product>(getContext(), android.R.layout.simple_list_item_1,products);

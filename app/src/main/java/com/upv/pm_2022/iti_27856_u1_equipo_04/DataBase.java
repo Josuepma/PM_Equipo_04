@@ -24,13 +24,13 @@ public class DataBase extends SQLiteOpenHelper {
             "CREATE TABLE Price" +
                     "(id INTEGER PRIMARY KEY, " +
                     "price DECIMAL(5,2), " +
-                    "date DATETIME," +
+                    "date DATETIME DEFAULT CURRENT_TIMESTAMP," +
                     "id_store REFERENCES Store(id)," +
                     "id_product REFERENCES Product(id))",
             "CREATE TABLE Comparative" +
                     "(id INTEGER PRIMARY KEY, " +
                     "difference DECIMAL(5,2)," +
-                    "date DATETIME, " +
+                    "date DATETIME DEFAULT CURRENT_TIMESTAMP, " +
                     "id_price_1 REFERENCES Price(id)," +
                     "id_price_2 REFERENCES Price(id))"
     };

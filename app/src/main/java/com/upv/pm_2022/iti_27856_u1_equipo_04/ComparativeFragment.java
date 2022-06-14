@@ -1,5 +1,6 @@
 package com.upv.pm_2022.iti_27856_u1_equipo_04;
 
+import android.app.Dialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +8,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,6 +67,49 @@ public class ComparativeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_comparative, container, false);
+        View view = inflater.inflate(R.layout.fragment_comparative, container, false);
+        Spinner spinner_prices_1 = view.findViewById(R.id.spinner_comparative_price_1);
+        ArrayList<Price> prices = Price.getAll(getContext());
+        ArrayAdapter<Price> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item,prices);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_prices_1.setAdapter(adapter);
+        Spinner spinner_prices_2 = view.findViewById(R.id.spinner_comparative_price_2);
+        spinner_prices_2.setAdapter(adapter);
+        Button btn_do = view.findViewById(R.id.btn_comprative_do);
+        TextView tv = view.findViewById(R.id.tv_comparative_result);
+        btn_do.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Price price1 = (Price) spinner_prices_1.getSelectedItem();
+                Price price2 = (Price) spinner_prices_2.getSelectedItem();
+                Comparative comparative = new Comparative(price1,price2);
+                tv.setText("difference = " + comparative.getDifference());
+            }
+        });
+        Button btn_add = view.findViewById(R.id.btn_comparative_add);
+        btn_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Price price1 = (Price) spinner_prices_1.getSelectedItem();
+                Price price2 = (Price) spinner_prices_2.getSelectedItem();
+                Comparative comparative = new Comparative(price1,price2);
+                Comparative.insert(getContext(),comparative);
+            }
+        });
+
+        Button btn_show = view.findViewById(R.id.btn_comparative_show);
+        btn_show.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Dialog dialog = new Dialog(getContext());
+                dialog.setContentView(R.layout.dialog_list);
+                ListView lv = dialog.findViewById(R.id.dialog_lv);
+                ArrayList<Comparative> comparatives = Comparative.getAll(getContext());
+                ArrayAdapter<Comparative> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1,comparatives);
+                lv.setAdapter(adapter);
+                dialog.show();
+            }
+        });
+        return view;
     }
 }

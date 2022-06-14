@@ -15,12 +15,12 @@ import java.util.Date;
 public class Price {
     private int id;
     private double price;
-    private Date date;
+    private String date;
     private Store store;
     private Product product;
     private static final String TABLE = "Price";
 
-    public Price(int id, double price,Date date,Store store, Product product){
+    public Price(int id, double price, String date, Store store, Product product){
         setId(id);
         setPrice(price);
         setDate(date);
@@ -28,7 +28,7 @@ public class Price {
         setProduct(product);
     }
 
-    public Price(double price,Store store,Date date, Product product){
+    public Price(double price, Store store, String date, Product product){
         setPrice(price);
         setDate(date);
         setStore(store);
@@ -69,13 +69,21 @@ public class Price {
         this.product = product;
     }
 
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     public static void insert(Context context, Price price){
         DataBase usdbh = new DataBase(context);
         SQLiteDatabase db = usdbh.getWritableDatabase();
         if(db != null){
             ContentValues values = new ContentValues();
             values.put("price",price.getPrice());
-            values.put("date",price.getDate().toString());
+            //values.put("date",price.getDate().toString());
             values.put("id_store",price.getStore().getId());
             values.put("id_product",price.getProduct().getId());
             db.insert(TABLE,null,values);
@@ -90,13 +98,8 @@ public class Price {
             Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE + " WHERE id = " + id,null);
             if(cursor.getCount()!=0 && cursor.moveToFirst()){
                 DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-                Date date = null;
-                try {
-                    date = df.parse(cursor.getString(cursor.getColumnIndexOrThrow("date")));
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                    return null;
-                }
+                String date = null;
+                date = cursor.getString(cursor.getColumnIndexOrThrow("date"));
                 return new Price(
                         cursor.getInt(cursor.getColumnIndexOrThrow("id")),
                         cursor.getDouble(cursor.getColumnIndexOrThrow("price")),
@@ -118,20 +121,15 @@ public class Price {
             if (cursor.getCount()!=0){
                 if (cursor.moveToFirst()){
                     do {
-                        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-                        Date date = null;
-                        try {
-                            date = df.parse(cursor.getString(cursor.getColumnIndexOrThrow("date")));
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                            return null;
-                        }
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        String date = null;
+                        date = cursor.getString(cursor.getColumnIndexOrThrow("date"));
                         Price price = new Price();
                         price.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndexOrThrow("id"))));
                         price.setPrice(cursor.getDouble(cursor.getColumnIndexOrThrow("price")));
                         price.setDate(date);
                         price.setStore(Store.get(context,cursor.getInt(cursor.getColumnIndexOrThrow("id_store"))));
-                        price.setProduct(Product.get(context,cursor.getInt(cursor.getColumnIndexOrThrow("id_brand"))));
+                        price.setProduct(Product.get(context,cursor.getInt(cursor.getColumnIndexOrThrow("id_product"))));
                         prices.add(price);
                     }while(cursor.moveToNext());
                 }
@@ -153,11 +151,5 @@ public class Price {
                 '}';
     }
 
-    public Date getDate() {
-        return date;
-    }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
 }

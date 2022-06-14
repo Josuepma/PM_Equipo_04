@@ -84,8 +84,8 @@ public class StoreFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Dialog dialog = new Dialog(getContext());
-                dialog.setContentView(R.layout.dialog_list_store);
-                ListView lv = dialog.findViewById(R.id.lv_store);
+                dialog.setContentView(R.layout.dialog_list);
+                ListView lv = dialog.findViewById(R.id.dialog_lv);
                 ArrayList<Store> stores = Store.getAll(getContext());
                 ArrayAdapter<Store> adapter = new ArrayAdapter<Store>(getContext(), android.R.layout.simple_list_item_1,stores);
                 lv.setAdapter(adapter);

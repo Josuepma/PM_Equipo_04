@@ -90,7 +90,6 @@ public class Product {
         if(db != null){
             Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE,null);
             if (cursor.getCount()!=0){
-                System.out.println("entro aqui");
                 if (cursor.moveToFirst()){
                     do {
                         Product product = new Product();
@@ -98,7 +97,6 @@ public class Product {
                         product.setName(cursor.getString(cursor.getColumnIndexOrThrow("name")));
                         product.setBrand(Brand.get(context,cursor.getInt(cursor.getColumnIndexOrThrow("id_brand"))));
                         products.add(product);
-                        System.out.println(product);
                     }while(cursor.moveToNext());
                 }
             }else{

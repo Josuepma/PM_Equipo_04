@@ -18,10 +18,10 @@ public class Comparative {
     private double difference;
     private Price price1;
     private Price price2;
-    private Date date;
+    private String date;
     private static final String TABLE = "Comparative";
 
-    public Comparative(int id,double difference, Date date ,Price price1, Price price2) {
+    public Comparative(int id,double difference, String date ,Price price1, Price price2) {
         setId(id);
         setDifference(difference);
         setDate(date);
@@ -72,13 +72,21 @@ public class Comparative {
         this.price2 = price2;
     }
 
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     public static void insert(Context context, Comparative comparative){
         DataBase usdbh = new DataBase(context);
         SQLiteDatabase db = usdbh.getWritableDatabase();
         if(db != null){
             ContentValues values = new ContentValues();
             values.put("difference",comparative.getDifference());
-            values.put("date",comparative.getDate().toString());
+            //values.put("date",comparative.getDate().toString());
             values.put("id_price_1",comparative.getPrice1().getId());
             values.put("id_price_2",comparative.getPrice2().getId());
             db.insert(TABLE,null,values);
@@ -92,14 +100,7 @@ public class Comparative {
         if(db != null){
             Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE + " WHERE id = " + id,null);
             if(cursor.getCount()!=0 && cursor.moveToFirst()){
-                DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-                Date date = null;
-                try {
-                    date = df.parse(cursor.getString(cursor.getColumnIndexOrThrow("date")));
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                    return null;
-                }
+                String date = cursor.getString(cursor.getColumnIndexOrThrow("date"));
                 return new Comparative(
                         cursor.getInt(cursor.getColumnIndexOrThrow("id")),
                         cursor.getDouble(cursor.getColumnIndexOrThrow("difference")),
@@ -118,16 +119,9 @@ public class Comparative {
         SQLiteDatabase db = usdbh.getWritableDatabase();
         if(db != null){
             Cursor cursor = db.rawQuery("SELECT * from " + TABLE,null);
-            if (cursor.getCount()!=0){
+            if (cursor.getCount()!=0 && cursor.moveToFirst()){
                 do {
-                    DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-                    Date date = null;
-                    try {
-                        date = df.parse(cursor.getString(cursor.getColumnIndexOrThrow("date")));
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                        return null;
-                    }
+                    String date = cursor.getString(cursor.getColumnIndexOrThrow("date"));
                     Comparative comparative = new Comparative();
                     comparative.setId(cursor.getInt(cursor.getColumnIndexOrThrow("id")));
                     comparative.setDifference(cursor.getDouble(cursor.getColumnIndexOrThrow("difference")));
@@ -152,13 +146,5 @@ public class Comparative {
                 ", price1=" + price1 +
                 ", price2=" + price2 +
                 '}';
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 }

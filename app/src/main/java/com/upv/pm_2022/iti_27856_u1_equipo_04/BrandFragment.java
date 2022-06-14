@@ -82,8 +82,8 @@ public class BrandFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Dialog dialog = new Dialog(getContext());
-                dialog.setContentView(R.layout.dialog_list_brand);
-                ListView lv = dialog.findViewById(R.id.lv_brand);
+                dialog.setContentView(R.layout.dialog_list);
+                ListView lv = dialog.findViewById(R.id.dialog_lv);
                 ArrayList<Brand> brands = Brand.getAll(getContext());
                 ArrayAdapter<Brand> adapter = new ArrayAdapter<Brand>(getContext(), android.R.layout.simple_list_item_1,brands);
                 lv.setAdapter(adapter);

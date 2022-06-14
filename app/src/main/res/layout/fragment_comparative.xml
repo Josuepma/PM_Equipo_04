@@ -14,43 +14,50 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:text="@string/Comparative" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <ListView
+            <Spinner
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:id="@+id/Comparative_price_1"
-                android:hint="Comparative price 1"/>
-
-            <ListView
+                android:id="@+id/spinner_comparative_price_1"/>
+            <Spinner
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:id="@+id/Comparative_price_2"
-                android:hint="Comparative price 2"/>
+                android:id="@+id/spinner_comparative_price_2"/>
 
         </LinearLayout>
 
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Do comparative"
+            android:id="@+id/btn_comprative_do"/>
+
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="Difference = "/>
+            android:layout_height="wrap_content"
+            android:text="Difference = "
+            android:id="@+id/tv_comparative_result"/>
 
         <Button
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="Save Comparative"/>
+            android:layout_height="wrap_content"
+            android:text="Save comparative"
+            android:id="@+id/btn_comparative_add"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Show comparatives"
+            android:id="@+id/btn_comparative_show"/>
 
     </LinearLayout>
 

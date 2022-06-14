@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
         viewPager2 = findViewById(R.id.ViewPager);
         tabLayout.addTab(tabLayout.newTab().setText("Brand"));
         tabLayout.addTab(tabLayout.newTab().setText("Product"));
+        tabLayout.addTab(tabLayout.newTab().setText("Stores"));
+        tabLayout.addTab(tabLayout.newTab().setText("Prices"));
         tabLayout.addTab(tabLayout.newTab().setText("Comparative"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), getLifecycle());

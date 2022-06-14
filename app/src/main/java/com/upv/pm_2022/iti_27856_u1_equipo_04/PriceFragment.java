@@ -1,5 +1,6 @@
 package com.upv.pm_2022.iti_27856_u1_equipo_04;
 
+import android.app.Dialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +8,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.Spinner;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,6 +67,44 @@ public class PriceFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_price, container, false);
+        View view = inflater.inflate(R.layout.fragment_price, container, false);
+        EditText et = view.findViewById(R.id.Price_price);
+        Spinner spinner_products = view.findViewById(R.id.spinner_price_product);
+        ArrayList<Product> products = Product.getAll(getContext());
+        ArrayAdapter<Product> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item,products);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_products.setAdapter(adapter);
+        Spinner spinner_stores = view.findViewById(R.id.spinner_price_store);
+        ArrayList<Store> stores = Store.getAll(getContext());
+        ArrayAdapter<Store> adapter_store = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item,stores);
+        adapter_store.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_stores.setAdapter(adapter_store);
+        Button btn = view.findViewById(R.id.btn_price_add);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Price.insert(getContext(), new Price(
+                        Double.parseDouble(et.getText().toString()),
+                        (Store)spinner_stores.getSelectedItem(),
+                        null,
+                        (Product)spinner_products.getSelectedItem()
+                ));
+            }
+        });
+
+        Button btn_list = view.findViewById(R.id.Price_button_list);
+        btn_list.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Dialog dialog = new Dialog(getContext());
+                dialog.setContentView(R.layout.dialog_list);
+                ListView lv = dialog.findViewById(R.id.dialog_lv);
+                ArrayList<Price> prices = Price.getAll(getContext());
+                ArrayAdapter<Price> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1,prices);
+                lv.setAdapter(adapter);
+                dialog.show();
+            }
+        });
+        return view;
     }
 }
