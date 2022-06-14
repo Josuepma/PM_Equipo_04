@@ -38,7 +38,7 @@ public class DataBase extends SQLiteOpenHelper {
     String[] delete = new String[]{
             "DROP TABLE IF EXISTS Comparative",
             "DROP TABLE IF EXISTS Store",
-            "DROP TABLE IF EXISTS Prices",
+            "DROP TABLE IF EXISTS Price",
             "DROP TABLE IF EXISTS Product",
             "DROP TABLE IF EXISTS Brand"
     };
