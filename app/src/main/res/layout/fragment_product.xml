@@ -33,6 +33,12 @@
             android:text="Add product"
             android:id="@+id/btn_product_add"/>
 
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/Product_button_list"
+            android:text="Show products"/>
+
     </LinearLayout>
 
 </FrameLayout>
