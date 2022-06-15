@@ -88,7 +88,7 @@ public class Price {
             values.put("id_store",price.getStore().getId());
             values.put("id_product",price.getProduct().getId());
             db.insert(TABLE,null,values);
-            //price.date ;
+            price.date = Calendar.getInstance().getTime().toString();
             Toast.makeText(context, "dato " + price + " insertado", Toast.LENGTH_SHORT).show();
         }
     }
