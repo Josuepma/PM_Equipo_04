@@ -130,8 +130,6 @@ public class Comparative {
                     comparative.setPrice2(Price.get(context,cursor.getInt(cursor.getColumnIndexOrThrow("id_price_2"))));
                     comparatives.add(comparative);
                 }while(cursor.moveToNext());
-            }else{
-                comparatives = null;
             }
             cursor.close();
         }
@@ -140,11 +138,9 @@ public class Comparative {
 
     @Override
     public String toString() {
-        return "Comparative{" +
-                "id=" + id +
-                ", difference=" + difference +
-                ", price1=" + price1 +
-                ", price2=" + price2 +
-                '}';
+        return "difference " + difference + "\n" +
+                "price1: " + price1 +
+                "price2: " + price2 +
+                " comparative made in" + date;
     }
 }

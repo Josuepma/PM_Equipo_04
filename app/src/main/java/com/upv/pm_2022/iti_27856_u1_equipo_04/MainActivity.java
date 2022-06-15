@@ -60,11 +60,17 @@ public class MainActivity extends AppCompatActivity {
                 AD = ADX.create();
                 AD.setMessage(
                         "Josue Elisoe Perales Melendez Y Alcocer \n" +
-                        "Carlos Sanchez Charles \n" +
-                        "Hector Varela \n" +
-                        "Anel Baez"
+                        "Carlos Eduardo Sanchez Charles \n" +
+                        "Hector Varela Grimaldo\n" +
+                        "Sandra Anel Baez Guerrero"
                         );
                 AD.show();
+                return true;
+            case R.id.Menu_import:
+                return true;
+            case R.id.Menu_export:
+                return true;
+            case R.id.Menu_graphic:
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

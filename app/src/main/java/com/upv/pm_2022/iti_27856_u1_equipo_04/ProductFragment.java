@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -71,6 +72,8 @@ public class ProductFragment extends Fragment {
         EditText et = view.findViewById(R.id.Product_name);
         Spinner spinner = view.findViewById(R.id.Product_spinner);
         ArrayList<Brand> brands = Brand.getAll(getContext());
+        if (brands.isEmpty())
+            Toast.makeText(getContext(), "There are no Brands", Toast.LENGTH_SHORT).show();
         ArrayAdapter<Brand> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item,brands);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
@@ -79,6 +82,11 @@ public class ProductFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Brand brand = (Brand) spinner.getSelectedItem();
+                if(et.getText().toString().isEmpty()) {
+                    Toast.makeText(getContext(), "Can't be empty", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (brand == null)return;
                 Product product = new Product(
                         et.getText().toString(),
                         brand

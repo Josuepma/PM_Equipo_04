@@ -99,8 +99,6 @@ public class Product {
                         products.add(product);
                     }while(cursor.moveToNext());
                 }
-            }else{
-                products = null;
             }
             cursor.close();
         }
@@ -109,10 +107,7 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{" +
-                "name='" + name + '\'' +
-                ", id=" + id +
-                ", brand=" + brand +
-                '}';
+        return name +
+                " brand: " + brand ;
     }
 }

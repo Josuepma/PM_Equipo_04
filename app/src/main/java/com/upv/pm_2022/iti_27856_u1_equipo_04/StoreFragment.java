@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -73,6 +74,10 @@ public class StoreFragment extends Fragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(et.getText().toString().isEmpty() && et1.getText().toString().isEmpty()) {
+                    Toast.makeText(getContext(), "Can't be empty", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 Store.insert(getContext(),new Store(
                         et.getText().toString(),
                         et1.getText().toString()
@@ -87,6 +92,10 @@ public class StoreFragment extends Fragment {
                 dialog.setContentView(R.layout.dialog_list);
                 ListView lv = dialog.findViewById(R.id.dialog_lv);
                 ArrayList<Store> stores = Store.getAll(getContext());
+                if (stores.isEmpty()){
+                    Toast.makeText(getContext(), "There are no Stores", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 ArrayAdapter<Store> adapter = new ArrayAdapter<Store>(getContext(), android.R.layout.simple_list_item_1,stores);
                 lv.setAdapter(adapter);
                 dialog.show();

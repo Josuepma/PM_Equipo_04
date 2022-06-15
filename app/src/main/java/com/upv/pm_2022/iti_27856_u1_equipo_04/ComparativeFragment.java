@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -75,11 +76,15 @@ public class ComparativeFragment extends Fragment {
         spinner_prices_1.setAdapter(adapter);
         Spinner spinner_prices_2 = view.findViewById(R.id.spinner_comparative_price_2);
         spinner_prices_2.setAdapter(adapter);
+        if (prices.isEmpty()){
+            Toast.makeText(getContext(), "There are no prices", Toast.LENGTH_SHORT).show();
+        }
         Button btn_do = view.findViewById(R.id.btn_comprative_do);
         TextView tv = view.findViewById(R.id.tv_comparative_result);
         btn_do.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (spinner_prices_1.getSelectedItem() == null || spinner_prices_2.getSelectedItem() == null) return;
                 Price price1 = (Price) spinner_prices_1.getSelectedItem();
                 Price price2 = (Price) spinner_prices_2.getSelectedItem();
                 Comparative comparative = new Comparative(price1,price2);
@@ -90,6 +95,7 @@ public class ComparativeFragment extends Fragment {
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (spinner_prices_1.getSelectedItem() == null || spinner_prices_2.getSelectedItem() == null) return;
                 Price price1 = (Price) spinner_prices_1.getSelectedItem();
                 Price price2 = (Price) spinner_prices_2.getSelectedItem();
                 Comparative comparative = new Comparative(price1,price2);
@@ -105,6 +111,10 @@ public class ComparativeFragment extends Fragment {
                 dialog.setContentView(R.layout.dialog_list);
                 ListView lv = dialog.findViewById(R.id.dialog_lv);
                 ArrayList<Comparative> comparatives = Comparative.getAll(getContext());
+                if (comparatives.isEmpty()){
+                    Toast.makeText(getContext(), "There are no Comparatives", Toast.LENGTH_SHORT).show();
+                    return ;
+                }
                 ArrayAdapter<Comparative> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1,comparatives);
                 lv.setAdapter(adapter);
                 dialog.show();

@@ -10,6 +10,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class Price {
@@ -87,6 +88,7 @@ public class Price {
             values.put("id_store",price.getStore().getId());
             values.put("id_product",price.getProduct().getId());
             db.insert(TABLE,null,values);
+            //price.date ;
             Toast.makeText(context, "dato " + price + " insertado", Toast.LENGTH_SHORT).show();
         }
     }
@@ -133,8 +135,6 @@ public class Price {
                         prices.add(price);
                     }while(cursor.moveToNext());
                 }
-            }else{
-                prices = null;
             }
             cursor.close();
         }
@@ -143,12 +143,10 @@ public class Price {
 
     @Override
     public String toString() {
-        return "Price{" +
-                "id=" + id +
-                ", price=" + price +
-                ", store=" + store +
-                ", product=" + product +
-                '}';
+        return price +
+                " store " + store +
+                " product " + product +
+                " date of price: " + date + "\n";
     }
 
 

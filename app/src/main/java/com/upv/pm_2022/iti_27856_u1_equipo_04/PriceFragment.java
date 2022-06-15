@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -79,10 +80,20 @@ public class PriceFragment extends Fragment {
         ArrayAdapter<Store> adapter_store = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item,stores);
         adapter_store.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_stores.setAdapter(adapter_store);
+        if (products.isEmpty())
+            Toast.makeText(getContext(), "There are no Products", Toast.LENGTH_SHORT).show();
+        if (stores.isEmpty())
+            Toast.makeText(getContext(), "There are no Stores", Toast.LENGTH_SHORT).show();
         Button btn = view.findViewById(R.id.btn_price_add);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (et.getText().toString().isEmpty()){
+                    Toast.makeText(getContext(), "Can't be empty", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (spinner_stores.getSelectedItem() == null || spinner_products.getSelectedItem() == null)
+                    return ;
                 Price.insert(getContext(), new Price(
                         Double.parseDouble(et.getText().toString()),
                         (Store)spinner_stores.getSelectedItem(),
@@ -100,6 +111,10 @@ public class PriceFragment extends Fragment {
                 dialog.setContentView(R.layout.dialog_list);
                 ListView lv = dialog.findViewById(R.id.dialog_lv);
                 ArrayList<Price> prices = Price.getAll(getContext());
+                if (prices.isEmpty()){
+                    Toast.makeText(getContext(), "There are no prices", Toast.LENGTH_SHORT).show();
+                    return ;
+                }
                 ArrayAdapter<Price> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1,prices);
                 lv.setAdapter(adapter);
                 dialog.show();

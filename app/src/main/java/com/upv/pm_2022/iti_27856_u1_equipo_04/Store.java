@@ -91,12 +91,10 @@ public class Store {
                         Store store = new Store();
                         store.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndexOrThrow("id"))));
                         store.setName(cursor.getString(cursor.getColumnIndexOrThrow("name")));
-                        store.setName(cursor.getString(cursor.getColumnIndexOrThrow("address")));
+                        store.setAddress(cursor.getString(cursor.getColumnIndexOrThrow("address")));
                         stores.add(store);
                     }while(cursor.moveToNext());
                 }
-            }else{
-                stores = null;
             }
             cursor.close();
         }
@@ -105,10 +103,6 @@ public class Store {
 
     @Override
     public String toString() {
-        return "Store{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                '}';
+        return name;
     }
 }

@@ -82,8 +82,6 @@ public class Brand {
                         brands.add(brand);
                     }while(cursor.moveToNext());
                 }
-            }else{
-                brands = null;
             }
             cursor.close();
         }
@@ -92,9 +90,6 @@ public class Brand {
 
     @Override
     public String toString() {
-        return "Brand{" +
-                "name='" + name + '\'' +
-                ", id=" + id +
-                '}';
+        return name;
     }
 }
