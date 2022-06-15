@@ -3,6 +3,7 @@ package com.upv.pm_2022.iti_27856_u1_equipo_04;
 import android.app.Dialog;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -32,6 +33,7 @@ public class ProductFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private ArrayAdapter<Brand> adapter = null;
 
     public ProductFragment() {
         // Required empty public constructor
@@ -74,7 +76,7 @@ public class ProductFragment extends Fragment {
         ArrayList<Brand> brands = Brand.getAll(getContext());
         if (brands.isEmpty())
             Toast.makeText(getContext(), "There are no Brands", Toast.LENGTH_SHORT).show();
-        ArrayAdapter<Brand> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item,brands);
+        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item,brands);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         Button btn = view.findViewById(R.id.btn_product_add);
@@ -92,6 +94,7 @@ public class ProductFragment extends Fragment {
                         brand
                 );
                 Product.insert(getContext(), product);
+                getActivity().recreate();
             }
         });
         Button btn_list = view.findViewById(R.id.Product_button_list);
@@ -109,5 +112,17 @@ public class ProductFragment extends Fragment {
             }
         });
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        adapter.notifyDataSetChanged();
     }
 }

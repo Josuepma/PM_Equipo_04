@@ -3,6 +3,7 @@ package com.upv.pm_2022.iti_27856_u1_equipo_04;
 import android.app.Dialog;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -28,6 +29,7 @@ public class ComparativeFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private ArrayAdapter<Price> adapter = null;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -71,7 +73,7 @@ public class ComparativeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_comparative, container, false);
         Spinner spinner_prices_1 = view.findViewById(R.id.spinner_comparative_price_1);
         ArrayList<Price> prices = Price.getAll(getContext());
-        ArrayAdapter<Price> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item,prices);
+        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item,prices);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_prices_1.setAdapter(adapter);
         Spinner spinner_prices_2 = view.findViewById(R.id.spinner_comparative_price_2);
@@ -121,5 +123,17 @@ public class ComparativeFragment extends Fragment {
             }
         });
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        adapter.notifyDataSetChanged();
     }
 }

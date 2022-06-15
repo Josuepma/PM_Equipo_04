@@ -80,6 +80,7 @@ public class BrandFragment extends Fragment {
                 Brand.insert(getContext(),new Brand(
                         et.getText().toString()
                 ));
+                getActivity().recreate();
             }
         });
         Button btn_list = view.findViewById(R.id.Brand_button_list);
@@ -98,6 +99,7 @@ public class BrandFragment extends Fragment {
 
                 lv.setAdapter(adapter);
                 dialog.show();
+
             }
         });
         return view;

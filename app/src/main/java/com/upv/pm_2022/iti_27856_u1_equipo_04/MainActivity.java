@@ -1,16 +1,26 @@
 package com.upv.pm_2022.iti_27856_u1_equipo_04;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Button;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+
+import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -18,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private final String dbName = "merch.db";
     private TabLayout tabLayout;
     private ViewPager2 viewPager2;
+    public ViewPagerAdapter adapter = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("Prices"));
         tabLayout.addTab(tabLayout.newTab().setText("Comparative"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), getLifecycle());
+        adapter = new ViewPagerAdapter(getSupportFragmentManager(), getLifecycle());
         viewPager2.setAdapter(adapter);
 
         String[] tabs = new String[]{"Brands","Products","Stores","Prices","Comparatives"};
@@ -71,6 +82,26 @@ public class MainActivity extends AppCompatActivity {
             case R.id.Menu_export:
                 return true;
             case R.id.Menu_graphic:
+                Dialog dialog = new Dialog(this);
+                dialog.setContentView(R.layout.dialog_chart);
+                BarChart bchart = findViewById(R.id.chart);
+                ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
+                for (int i = 0; i < 10 + 1; i++) {
+                    float val = (float) (Math.random());
+                    yVals1.add(new BarEntry(i, val));
+                }
+                BarDataSet set1;
+                set1 = new BarDataSet(yVals1, "The year 2017");
+                set1.setColors(ColorTemplate.MATERIAL_COLORS);
+                ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
+                dataSets.add(set1);
+                BarData data = new BarData(dataSets);
+                data.setValueTextSize(10f);
+                data.setBarWidth(0.9f);
+                bchart.setTouchEnabled(true);
+                bchart.setData(data);
+                bchart.animateXY(2000, 2000);
+                bchart.invalidate();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

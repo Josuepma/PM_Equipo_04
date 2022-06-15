@@ -5,6 +5,7 @@
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/dialog_add_price.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/dialog_chart.xml" value="0.1" />
         <entry key="app/src/main/res/layout/dialog_list.xml" value="0.1" />
         <entry key="app/src/main/res/layout/dialog_list_brand.xml" value="0.15942028985507245" />
         <entry key="app/src/main/res/layout/dialog_list_product.xml" value="0.1" />

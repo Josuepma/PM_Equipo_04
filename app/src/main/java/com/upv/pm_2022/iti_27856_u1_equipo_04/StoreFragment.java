@@ -82,6 +82,7 @@ public class StoreFragment extends Fragment {
                         et.getText().toString(),
                         et1.getText().toString()
                 ));
+                getActivity().recreate();
             }
         });
         Button btn_list = view.findViewById(R.id.Store_button_list);

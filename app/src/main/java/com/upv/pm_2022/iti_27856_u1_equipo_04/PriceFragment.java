@@ -1,8 +1,10 @@
 package com.upv.pm_2022.iti_27856_u1_equipo_04;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -32,6 +34,9 @@ public class PriceFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private ArrayAdapter<Store> adapter_store = null;
+    private ArrayAdapter<Product> adapter = null;
 
     public PriceFragment() {
         // Required empty public constructor
@@ -72,12 +77,12 @@ public class PriceFragment extends Fragment {
         EditText et = view.findViewById(R.id.Price_price);
         Spinner spinner_products = view.findViewById(R.id.spinner_price_product);
         ArrayList<Product> products = Product.getAll(getContext());
-        ArrayAdapter<Product> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item,products);
+        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item,products);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_products.setAdapter(adapter);
         Spinner spinner_stores = view.findViewById(R.id.spinner_price_store);
         ArrayList<Store> stores = Store.getAll(getContext());
-        ArrayAdapter<Store> adapter_store = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item,stores);
+        adapter_store = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item,stores);
         adapter_store.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_stores.setAdapter(adapter_store);
         if (products.isEmpty())
@@ -100,6 +105,7 @@ public class PriceFragment extends Fragment {
                         null,
                         (Product)spinner_products.getSelectedItem()
                 ));
+                getActivity().recreate();
             }
         });
 
@@ -121,5 +127,19 @@ public class PriceFragment extends Fragment {
             }
         });
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        adapter.notifyDataSetChanged();
+        adapter_store.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        adapter.notifyDataSetChanged();
+        adapter_store.notifyDataSetChanged();
     }
 }
