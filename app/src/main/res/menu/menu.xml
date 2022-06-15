@@ -21,10 +21,4 @@
         app:showAsAction="never|withText"
         android:orderInCategory="1"
         />
-    <item
-        android:id="@+id/Menu_graphic"
-        android:title="Show Graphic"
-        app:showAsAction="never|withText"
-        android:orderInCategory="1"
-        />
 </menu>

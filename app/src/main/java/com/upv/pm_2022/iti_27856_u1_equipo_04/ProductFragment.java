@@ -16,6 +16,13 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
+
 import java.util.ArrayList;
 
 /**
@@ -111,6 +118,32 @@ public class ProductFragment extends Fragment {
                 dialog.show();
             }
         });
+
+        Button btn_graphic = view.findViewById(R.id.btn_product_graphic);
+        btn_graphic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                BarChart bchart = view.findViewById(R.id.chart);
+                ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
+                for (int i = 0; i < 10 + 1; i++) {
+                    float val = (float) (Math.random());
+                    yVals1.add(new BarEntry(i, val));
+                }
+                BarDataSet set1;
+                set1 = new BarDataSet(yVals1, "The year 2017");
+                set1.setColors(ColorTemplate.MATERIAL_COLORS);
+                ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
+                dataSets.add(set1);
+                BarData data = new BarData(dataSets);
+                data.setValueTextSize(10f);
+                data.setBarWidth(0.9f);
+                bchart.setTouchEnabled(true);
+                bchart.setData(data);
+                bchart.animateXY(2000, 2000);
+                bchart.invalidate();
+            }
+        });
+
         return view;
     }
 

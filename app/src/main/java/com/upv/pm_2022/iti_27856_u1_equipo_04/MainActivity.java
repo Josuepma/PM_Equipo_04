@@ -81,28 +81,6 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.Menu_export:
                 return true;
-            case R.id.Menu_graphic:
-                Dialog dialog = new Dialog(this);
-                dialog.setContentView(R.layout.dialog_chart);
-                BarChart bchart = findViewById(R.id.chart);
-                ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
-                for (int i = 0; i < 10 + 1; i++) {
-                    float val = (float) (Math.random());
-                    yVals1.add(new BarEntry(i, val));
-                }
-                BarDataSet set1;
-                set1 = new BarDataSet(yVals1, "The year 2017");
-                set1.setColors(ColorTemplate.MATERIAL_COLORS);
-                ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
-                dataSets.add(set1);
-                BarData data = new BarData(dataSets);
-                data.setValueTextSize(10f);
-                data.setBarWidth(0.9f);
-                bchart.setTouchEnabled(true);
-                bchart.setData(data);
-                bchart.animateXY(2000, 2000);
-                bchart.invalidate();
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

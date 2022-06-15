@@ -39,6 +39,17 @@
             android:id="@+id/Product_button_list"
             android:text="Show products"/>
 
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_product_graphic"
+            android:text="Show graphic"/>
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/chart"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            />
     </LinearLayout>
 
 </FrameLayout>
