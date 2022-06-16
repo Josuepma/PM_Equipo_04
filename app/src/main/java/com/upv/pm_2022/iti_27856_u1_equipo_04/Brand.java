@@ -92,4 +92,9 @@ public class Brand {
     public String toString() {
         return name;
     }
+
+    public String toStringCsv(){
+        return id + "," +
+                name;
+    }
 }

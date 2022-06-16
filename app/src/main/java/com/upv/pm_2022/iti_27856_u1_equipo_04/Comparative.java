@@ -143,4 +143,12 @@ public class Comparative {
                 "price2: " + price2 +
                 " comparative made in" + date;
     }
+
+    public String toStringCsv(){
+        return id + "," +
+                difference + "," +
+                date + "," +
+                price1.getId() + "," +
+                price2.getId();
+    }
 }

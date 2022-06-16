@@ -149,5 +149,13 @@ public class Price {
                 " date of price: " + date + "\n";
     }
 
+    public String toStringCsv(){
+        return id + "," +
+                price + "," +
+                date + "," +
+                store.getId() + "," +
+                product.getId();
+    }
+
 
 }

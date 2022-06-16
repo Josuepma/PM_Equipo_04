@@ -105,4 +105,11 @@ public class Store {
     public String toString() {
         return name;
     }
+
+    public String toStringCsv(){
+        return id + "," +
+                name + "," +
+                address;
+    }
+
 }

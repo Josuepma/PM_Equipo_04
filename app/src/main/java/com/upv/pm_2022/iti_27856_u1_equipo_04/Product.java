@@ -110,4 +110,10 @@ public class Product {
         return name +
                 " brand: " + brand ;
     }
+
+    public String toStringCsv(){
+        return id + "," +
+                name + "," +
+                brand.getId();
+    }
 }
